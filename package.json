@@ -19,8 +19,8 @@
   },
   "homepage": "https://github.com/XionKannagi/typescript-for-javascript-developers#readme",
   "devDependencies": {
-    "ts-node": "^8.6.2",
-    "ts-node-dev": "^1.0.0-pre.44",
+    "ts-node": "^9.0.0",
+    "ts-node-dev": "^1.0.0-pre.63",
     "typescript": "^3.7.5"
   }
 }
