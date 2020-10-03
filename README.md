@@ -8,6 +8,7 @@
  - [2.package.jsonの作成](#2.package.jsonの作成)
  - [3.Typescriptパッケージの導入](#3.Typescriptパッケージの導入)
  - [4.JavaScriptへコンパイルする。](#4.JavaScriptへコンパイルする。)
+ - [5.ts nodeのインストール](#5.ts-nodeのインストール)
 
 
 ## 1.Nodeインストール
@@ -61,6 +62,7 @@ npmでtypescriptをインストールする。
 
 
 # 4.JavaScriptへコンパイルする。
+----
 `tscコマンド`を使って.tsファイルを.jsコンパイルする。  
 
 コンパイル対象にするファイルを`./src/install-typescript.ts`として作成する。  
@@ -75,4 +77,29 @@ console.log({message});
 % ./node_modules/.bin/tsc src/install-typescript.ts # 冗長なので以下npxがおすすめ
 
 % npx tsc src/install-typescript.ts # npxがパッケージ配下を探索してコマンドパスを補完してくれる。
+```
+生成されたjsファイルの実行。  
+```
+% node src/install-typescript.js
+{ message: 'Hello TypeScript!' }
+```
+
+## 5.ts-nodeのインストール
+----
+`ts-nodeパッケージ`をインストールして[4.JavaScriptへコンパイルする。](#4.JavaScriptへコンパイルする。) で行った  
+`compile`&`run`を同時に行ってくれるようにする。
+
+以下コマンドでインストール
+```
+% npm install --save-dev ts-node@8.6.2
++ ts-node@8.6.2
+added 8 packages from 40 contributors and audited 9 packages in 1.191s
+found 0 vulnerabilities
+
+```
+
+実行
+```
+% npx ts-node src/install-typescript.ts
+{ message: 'Hello TypeScript!' }
 ```
