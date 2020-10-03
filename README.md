@@ -8,7 +8,10 @@
  - [2.package.jsonの作成](#2.package.jsonの作成)
  - [3.Typescriptパッケージの導入](#3.Typescriptパッケージの導入)
  - [4.JavaScriptへコンパイルする。](#4.JavaScriptへコンパイルする。)
- - [5.ts nodeのインストール](#5.ts-nodeのインストール)
+ - [5.ts-nodeのインストール](#5.ts-nodeのインストール)
+ - [6.ts-node-devのインストール](#6.ts-node-devのインストール)
+   - [6.1インストール](#6.2インストール)
+   - [6.2npmタスクに登録する](#6.2npmタスクに登録する)
 
 
 ## 1.Nodeインストール
@@ -61,7 +64,7 @@ npmでtypescriptをインストールする。
 ```
 
 
-# 4.JavaScriptへコンパイルする。
+# 4.JavaScriptへコンパイルする
 ----
 `tscコマンド`を使って.tsファイルを.jsコンパイルする。  
 
@@ -84,7 +87,7 @@ console.log({message});
 { message: 'Hello TypeScript!' }
 ```
 
-## 5.ts-nodeのインストール
+# 5.ts-nodeのインストール
 ----
 `ts-nodeパッケージ`をインストールして[4.JavaScriptへコンパイルする。](#4.JavaScriptへコンパイルする。) で行った  
 `compile`&`run`を同時に行ってくれるようにする。
@@ -102,4 +105,68 @@ found 0 vulnerabilities
 ```
 % npx ts-node src/install-typescript.ts
 { message: 'Hello TypeScript!' }
+```
+
+# 6.ts-node-devのインストール
+----
+上記の`ts-node`では、ファイル変更のたびにコマンドの実行が必要だったが、  
+`ts-node-dev`を利用することでファイルが変更されると自動で実行されるようになる。  
+
+## 6.1インストール
+----
+```
+% npm install --save-dev ts-node-dev@1.0.0-pre.44
++ ts-node-dev@1.0.0-pre.44
+added 74 packages from 44 contributors and audited 83 packages in 4.626s
+
+3 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+```
+
+利用するいは設定が必要になるので、以下コマンドを実行する。
+```
+ts-node-dev --respawn src/install-typescript.ts # コンパイル＋実行の場合
+
+ts-node-dev --respawn --transpile-only src/install-typescript.ts # コンパイルのみ
+```
+## 6.2npmタスクに登録する
+----
+`pakage.json`を編集する。
+```json: package.json
+{
+  "name": "typescript-for-javascript-developers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn", ←コレを追加する。
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XionKannagi/typescript-for-javascript-developers.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/XionKannagi/typescript-for-javascript-developers/issues"
+  },
+  "homepage": "https://github.com/XionKannagi/typescript-for-javascript-developers#readme",
+  "devDependencies": {
+    "ts-node": "^8.6.2",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.7.5"
+  }
+}
+
+```
+
+タスクを実行する。
+```
+% npm run dev src/install-typescript.ts
+
 ```
