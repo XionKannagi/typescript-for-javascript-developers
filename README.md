@@ -61,6 +61,8 @@ npmでtypescriptをインストールする。
 
 % npm install --save-dev  typescript@3.7.5 #開発環境にのみtypescriptを導入する。
 
+% npx tsc --init #tsconfig.js生成
+
 ```
 
 
